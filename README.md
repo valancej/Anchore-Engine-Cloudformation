@@ -3,7 +3,7 @@
 Anchore Engine on AWS via Cloudformation
 
  - Single Ubuntu 16.04 EC2 instance
- - Anchore Engine with Docker Compsoe
+ - Anchore Engine with Docker Compose
 
 1. Pull down https://raw.githubusercontent.com/valancej/Anchore-Engine-Cloudformation/master/AnchoreEngine.yaml
 2. Update KeyName property in AnchoreEngine.yaml to your AWS key pair name.
