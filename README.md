@@ -8,4 +8,4 @@ Anchore Engine on AWS via Cloudformation
 
 Optional:
 
-Install https://github.com/anchore/anchore-cli 
+Install Anchore-CLI: https://github.com/anchore/anchore-cli 
