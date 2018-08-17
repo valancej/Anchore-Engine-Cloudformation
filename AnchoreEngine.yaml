@@ -11,8 +11,9 @@ Resources:
         Fn::Base64:
           !Sub |
              #!/bin/bash -ex
-             curl -o anchoreInstall.sh
-             chmod +x anchoreInstall.sh
+             curl https://raw.githubusercontent.com/valancej/Anchore-Engine-Cloudformation/master/scripts/anchoreInstall.sh -o anchoreInstall.sh;
+             chmod +x anchoreInstall.sh;
+             ./anchoreInstall.sh
   InstanceSecurityGroup:
     Type: 'AWS::EC2::SecurityGroup'
     Properties:
