@@ -27,3 +27,6 @@ cd aevolume;
 mkdir config && mkdir db
 curl https://raw.githubusercontent.com/anchore/anchore-engine/master/scripts/docker-compose/config.yaml -o config/config.yaml;
 curl https://raw.githubusercontent.com/valancej/Anchore-Engine-Cloudformation/master/config/docker-compose.yaml -o docker-compose.yaml
+
+docker-compose pull
+docker-compose up -d
