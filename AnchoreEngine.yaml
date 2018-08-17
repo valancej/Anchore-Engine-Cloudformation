@@ -1,0 +1,48 @@
+Resources:
+  Ec2Instance:
+    Type: 'AWS::EC2::Instance'
+    Properties:
+      SecurityGroups:
+        - !Ref InstanceSecurityGroup
+      ImageId: 'ami-5e8bb23b'
+      InstanceType: 't2.large'
+      KeyName: 'jvalance'
+      UserData:
+        Fn::Base64:
+          !Sub |
+             #!/bin/bash -ex
+             apt-get -y update;
+             apt-get -y install \
+             apt-transport-https \
+             ca-certificates \
+             curl \
+             software-properties-common;
+             curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -;
+             sudo add-apt-repository \
+             "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
+             $(lsb_release -cs) \
+             stable";
+             apt-get -y update;
+             apt-get -y install docker-ce;
+             curl -L https://github.com/docker/compose/releases/download/1.22.0/docker-compose-$(uname -s)-$(uname -m) -o /usr/local/bin/docker-compose;
+             chmod +x /usr/local/bin/docker-compose;
+             mkdir aevolume;
+             cd aevolume;
+             curl https://raw.githubusercontent.com/anchore/anchore-engine/master/scripts/docker-compose/config.yaml -o config.yaml;
+  InstanceSecurityGroup:
+    Type: 'AWS::EC2::SecurityGroup'
+    Properties:
+      GroupDescription: Enable SSH access via port 22
+      SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: '22'
+          ToPort: '22'
+          CidrIp: 0.0.0.0/0
+        - IpProtocol: tcp
+          FromPort: '443'
+          ToPort: '443'
+          CidrIp: 0.0.0.0/0
+        - IpProtocol: tcp
+          FromPort: '8228'
+          ToPort: '8228'
+          CidrIp: 0.0.0.0/0  
